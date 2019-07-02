@@ -5,5 +5,32 @@
   <%= @company.name %>
 </p>
 
+
+<h3>Reclamos:</h3>
+<ol>
+<%  @complaints.each do |complaint| %>
+<li><%= complaint.content %></li>
+<% end %>
+</ol>
+
+<%= form_with model: [@company, Complaint.new],url: company_add_complaint_path(@company) do |form| %>
+
+  <div class="form-group">
+    <h5>Agregar reclamo</h3>
+    <%= form.label :contenido %>
+    <%= form.text_field :content, class:'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>

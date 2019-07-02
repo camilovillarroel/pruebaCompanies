@@ -12,6 +12,12 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @complaints = Complaint.where(company_id: params[:id])
+    @complaint = Complaint.new(
+      company_id: params[:id],
+      user_id: current_user.id 
+   )
+
   end
 
   # GET /companies/new
@@ -61,6 +67,12 @@ class CompaniesController < ApplicationController
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
       format.json { head :no_content }
     end
+    def add_complaint
+      complaint = Complaint.new(params[:user_id][:id])
+      company = Company.new(params[:id])
+      project.complaints << complaint
+      redirect_to companies_path(company)
+  end
   end
 
   private
