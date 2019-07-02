@@ -9,13 +9,13 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id= 'companies'>
     <% @companies.each do |company| %>
       <tr>
         <td><%= company.name %></td>
         <td><%= link_to 'Detalle', company %></td>
         <td><%= link_to 'Editar', edit_company_path(company) %></td>
-        <td><%= link_to 'Eliminar', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Eliminar', company, method: :delete, data: { confirm: 'Are you sure?' }%></td>
       </tr>
     <% end %>
   </tbody>
@@ -23,7 +23,7 @@
 
 <br>
 
-<%= form_with(model: @company, local: true) do |form| %>
+<%= form_with(model: @company) do |form| %>
   <% if @company.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
@@ -46,6 +46,36 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+
+$('[name="commit"]').click(function(e){
+        e.preventDefault();
+ 
+  $.ajax({
+    url: "<%= companies_path%>",
+    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+    type: 'POST',
+    dataType: 'script',
+    data: {company: {name: $('[name="company[name]"]').val()}}
+  })
+  .done(function() {
+    console.log("success");
+  })
+  .fail(function() {
+    console.log("error");
+  })
+  .always(function() {
+    console.log("complete");
+  });
+
+});
+
+
+
+
+</script>
+
 
 
 

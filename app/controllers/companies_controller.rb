@@ -33,16 +33,7 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     @company = Company.new(company_params)
-
-    respond_to do |format|
-      if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
-        format.json { render :show, status: :created, location: @company }
-      else
-        format.html { render :new }
-        format.json { render json: @company.errors, status: :unprocessable_entity }
-      end
-    end
+    @company.save
   end
 
   # PATCH/PUT /companies/1
@@ -56,8 +47,8 @@ class CompaniesController < ApplicationController
         format.html { render :edit }
         format.json { render json: @company.errors, status: :unprocessable_entity }
       end
-    end
   end
+  
 
   # DELETE /companies/1
   # DELETE /companies/1.json
@@ -65,15 +56,18 @@ class CompaniesController < ApplicationController
     @company.destroy
     respond_to do |format|
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { head :no_content }  
     end
-    def add_complaint
-      complaint = Complaint.new(params[:user_id][:id])
-      company = Company.new(params[:id])
-      project.complaints << complaint
-      redirect_to companies_path(company)
   end
+
+
+  def add_complaint
+    complaint = Complaint.new(params[:user_id][:id])
+    company = Company.new(params[:id])
+    project.complaints << complaint
+    redirect_to companies_path(company)
   end
+end
 
   private
     # Use callbacks to share common setup or constraints between actions.
