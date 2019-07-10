@@ -23,18 +23,7 @@
 
 <br>
 
-<%= form_with(model: @company) do |form| %>
-  <% if @company.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
-
-      <ul>
-      <% @company.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_with(model: @company, remote: true) do |form| %>
 
   <div class="form-group">
     <h5>Agregar compañía</h3>
@@ -47,32 +36,12 @@
   </div>
 <% end %>
 
+
+
+
+
+
 <script>
-
-$('[name="commit"]').click(function(e){
-        e.preventDefault();
- 
-  $.ajax({
-    url: "<%= companies_path%>",
-    beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-    type: 'POST',
-    dataType: 'script',
-    data: {company: {name: $('[name="company[name]"]').val()}}
-  })
-  .done(function() {
-    console.log("success");
-  })
-  .fail(function() {
-    console.log("error");
-  })
-  .always(function() {
-    console.log("complete");
-  });
-
-});
-
-
-
 
 </script>
 
