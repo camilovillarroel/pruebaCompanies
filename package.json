@@ -1,5 +1,7 @@
 {
   "name": "prueba_ajax",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
 }
