@@ -61,8 +61,8 @@ class CompaniesController < ApplicationController
         format.html { render :edit }
         format.json { render json: @company.errors, status: :unprocessable_entity }
       end
+    end
   end
-  
 
   # DELETE /companies/1
   # DELETE /companies/1.json
@@ -76,13 +76,14 @@ class CompaniesController < ApplicationController
   end
 
 
-  def add_complaint
-    complaint = Complaint.new(params[:user_id][:id])
-    company = Company.new(params[:id])
-    project.complaints << complaint
-    redirect_to companies_path(company)
-  end
-end
+  # def add_complaint
+  #   user_id = current_user.id
+  #   complaint = Complaint.new(user_id: user_id)
+  #   company = Company.find(params[:id])
+  #   company.complaints << complaint
+  #   complaint.save
+  # end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -94,4 +95,5 @@ end
     def company_params
       params.require(:company).permit(:name)
     end
+
 end

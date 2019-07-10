@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :companies do
     resources :complaints
-    post '/companies/:id', to: 'companies#add_complaint', as: 'add_complaint'
+    post '/complaints/:id', to: 'complaints#create', as: 'add_complaint'
   end
 
   root 'companies#index'
