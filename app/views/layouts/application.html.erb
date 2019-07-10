@@ -11,8 +11,9 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light sticky-top">
       <span class="navbar-brand mb-0 h1">Bienvenido</span>
+      <a class="navbar-brand" href="<%= root_path%>">Index</a>
       <ul class="navbar-nav">
       <% if user_signed_in? %>
         <li> 
