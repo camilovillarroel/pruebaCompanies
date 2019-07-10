@@ -33,7 +33,7 @@ class CompaniesController < ApplicationController
   # POST /companies.json
   def create
     @company = Company.new(company_params)
-    
+
     respond_to do |format|
       if @company.save
         format.html { redirect_to @company, notice: 'company was successfully created.' }
@@ -68,7 +68,8 @@ class CompaniesController < ApplicationController
     @company.destroy
     respond_to do |format|
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
-      format.json { head :no_content }  
+      format.json { head :no_content }
+      format.js {}  
     end
   end
 
