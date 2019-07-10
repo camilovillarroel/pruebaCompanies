@@ -12,7 +12,7 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    @complaints = Complaint.where(company_id: params[:id])
+    @complaints = Complaint.where(company_id: params[:id]).order(created_at: :desc)
     @complaint = Complaint.new(
       company_id: params[:id],
       user_id: current_user.id 
@@ -75,14 +75,6 @@ class CompaniesController < ApplicationController
     end
   end
 
-
-  # def add_complaint
-  #   user_id = current_user.id
-  #   complaint = Complaint.new(user_id: user_id)
-  #   company = Company.find(params[:id])
-  #   company.complaints << complaint
-  #   complaint.save
-  # end
 
 
   private
