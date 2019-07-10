@@ -27,6 +27,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
+    
   end
 
   # POST /companies
@@ -55,6 +56,7 @@ class CompaniesController < ApplicationController
       if @company.update(company_params)
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @company }
+        format.js { }
       else
         format.html { render :edit }
         format.json { render json: @company.errors, status: :unprocessable_entity }
